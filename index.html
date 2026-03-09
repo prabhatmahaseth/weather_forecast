@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- weather icons (using emoji for simplicity) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-300 via-indigo-300 to-purple-300 min-h-screen flex flex-col font-roboto">
+
+    <!-- Navbar / Header -->
+    <header class="p-4 flex justify-between items-center animate__animated animate__fadeInDown">
+        <h1 class="text-2xl font-bold text-white animate__animated animate__fadeInLeft">Weather Forecast</h1>
+        <div class="flex items-center space-x-4">
+            <input id="cityInput" type="text" placeholder="Enter city" 
+                   class="px-4 py-2 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 transition w-40" />
+            <button id="searchBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg shadow hover:bg-gray-100 transition">
+                Search
+            </button>
+            <button id="refreshBtn" title="Refresh data" class="text-white hover:text-gray-200 transform transition" id="refreshIcon">
+                🔄
+            </button>
+            <label class="flex items-center space-x-2 text-white cursor-pointer">
+                <span>🌙</span>
+                <input id="darkToggle" type="checkbox" class="hidden" />
+                <div class="w-8 h-4 bg-gray-200 rounded-full relative transition-colors"></div>
+            </label>
+        </div>
+    </header>
+    
+    <!-- Main content container -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+        <!-- Current weather section -->
+        <section id="currentWeather" class="bg-white bg-opacity-60 backdrop-blur-lg rounded-xl p-6 shadow-lg mb-8 animate-fadeIn hover:shadow-2xl transition-shadow">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="text-center md:text-left">
+                    <h2 id="cityName" class="text-3xl font-semibold"></h2>
+                    <p id="conditionText" class="mt-1 text-lg text-gray-700"></p>
+                    <p class="mt-2 text-6xl font-bold" id="currentTemp"></p>
+                </div>
+                <div id="weatherIcon" class="w-32 h-32 animate-pulse"></div>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-4 text-gray-700">
+                <div>Humidity: <span id="humidity"></span>%</div>
+                <div>Wind: <span id="wind"></span> km/h</div>
+            </div>
+        </section>
+
+        <!-- Forecast section -->
+        <section id="forecastSection" class="animate-fadeIn">
+            <h3 class="text-2xl font-semibold mb-4">3-Day Forecast</h3>
+            <div id="forecastCards" class="grid gap-4 grid-cols-1 sm:grid-cols-3"></div>
+        </section>
+    </main>
+
+    <!-- detailed info modal -->
+    <div id="detailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md w-full relative">
+            <button id="modalClose" class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 dark:text-gray-300">✖️</button>
+            <h4 id="modalCity" class="text-xl font-semibold mb-2"></h4>
+            <p id="modalDetails" class="text-gray-700 dark:text-gray-200"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
